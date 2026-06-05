@@ -25,7 +25,7 @@ below target. Recommend immediate coaching on
 talk time management."
 ```
 
-## 🏗️ Why This Is An AGENT, Not Just RAG
+##  Why This Is An AGENT, Not Just RAG
 
 Most AI chatbots just retrieve documents and answer.
 This system **decides what to do** based on your question.
@@ -71,7 +71,7 @@ SQL Tools                               RAG Tool
                   ▼
          Response: answer + sources + tools_used
 
-## ✨ Features
+##  Features
 
 **5 Agent Tools:**
 - `search_knowledge_base` — Semantic search on KPI docs and summaries
@@ -121,7 +121,7 @@ cc_chatbot/
 | Calls Handled | — | Volume metric |
 
 
-## 🎯 Domain Expertise
+## Domain Expertise
 
 This project was built by a Data Analyst with 2 years
 of hands-on experience working with real call center
