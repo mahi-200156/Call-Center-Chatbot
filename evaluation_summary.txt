@@ -1,0 +1,8 @@
+Call Center AI Analyst — RAGAS Evaluation
+Run at: 2026-07-22 14:39:58
+Test cases: 10
+
+Faithfulness:       1.000
+Answer Relevancy:   0.961
+Context Precision:  0.667
+Overall:            0.876

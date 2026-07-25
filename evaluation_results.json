@@ -1,0 +1,82 @@
+{
+  "timestamp": "2026-07-22 14:39:58",
+  "num_tests": 10,
+  "metrics": {
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.961,
+    "context_precision": 0.667,
+    "overall": 0.876
+  },
+  "per_question": [
+    {
+      "question": "What is AHT and what is the target for it?",
+      "faithfulness": NaN,
+      "answer_relevancy": NaN,
+      "context_precision": 1.0,
+      "answer": "AHT stands for Average Handle Time, which is the average minutes per call including talk, hold, and wrap-up. The target for AHT is less than 5.0 minutes."
+    },
+    {
+      "question": "What does FCR mean and why does it matter?",
+      "faithfulness": NaN,
+      "answer_relevancy": NaN,
+      "context_precision": NaN,
+      "answer": "FCR means First Call Resolution, which is the percentage of calls resolved without a callback. A low FCR means customers call back repeatedly."
+    },
+    {
+      "question": "What is CSAT and what is its target?",
+      "faithfulness": NaN,
+      "answer_relevancy": NaN,
+      "context_precision": 1.0,
+      "answer": "CSAT is the Customer Satisfaction Score, which is a post-call survey rating. The target for CSAT is >85%."
+    },
+    {
+      "question": "What is Schedule Adherence and what is the target?",
+      "faithfulness": 1.0,
+      "answer_relevancy": NaN,
+      "context_precision": 1.0,
+      "answer": "Schedule Adherence is the % of time agents follow their scheduled shifts. The target is >90%."
+    },
+    {
+      "question": "What are the common causes of high AHT?",
+      "faithfulness": NaN,
+      "answer_relevancy": NaN,
+      "context_precision": 1.0,
+      "answer": "High AHT indicates inefficiency or complex queries."
+    },
+    {
+      "question": "What causes low FCR in a call center?",
+      "faithfulness": NaN,
+      "answer_relevancy": NaN,
+      "context_precision": 0.0,
+      "answer": "Low FCR means customers call back repeatedly."
+    },
+    {
+      "question": "Who are the agents in Team A and where are they located?",
+      "faithfulness": 1.0,
+      "answer_relevancy": NaN,
+      "context_precision": NaN,
+      "answer": "The agent in Team A is Vikram Nair (AGT005) and is located in Mumbai."
+    },
+    {
+      "question": "Who are the agents in Team B?",
+      "faithfulness": NaN,
+      "answer_relevancy": NaN,
+      "context_precision": NaN,
+      "answer": "The agents in Team B are Kavya Menon (AGT008) and Divya Patel (AGT006)."
+    },
+    {
+      "question": "What KPI targets should call center agents meet?",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.939,
+      "context_precision": 0.0,
+      "answer": "Call center agents should meet the following KPI targets: \n- AHT: <5.0 min\n- FCR: >80%\n- Adherence: >90%"
+    },
+    {
+      "question": "Which KPIs are tracked for each agent monthly?",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.983,
+      "context_precision": NaN,
+      "answer": "The KPIs tracked for each agent monthly are: \n1. AHT (Average Handling Time)\n2. FCR (First Call Resolution)\n3. CSAT (Customer Satisfaction)\n4. Adherence (Schedule Adherence)"
+    }
+  ]
+}
