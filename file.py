@@ -1,18 +1,11 @@
-"""
-streamlit_app.py — Call Center AI Analyst UI
-Run: streamlit run streamlit_app.py
-"""
 
 import streamlit as st
 import time
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv()
 
-# ─────────────────────────────────────────────
-# PAGE CONFIG
-# ─────────────────────────────────────────────
 st.set_page_config(
     page_title="Call Center AI Analyst",
     page_icon="📊",
@@ -20,10 +13,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-
-# ─────────────────────────────────────────────
-# LOAD RESOURCES ONCE
-# ─────────────────────────────────────────────
 @st.cache_resource
 def load_all():
     from langchain_groq import ChatGroq
@@ -31,12 +20,12 @@ def load_all():
     from langchain_community.vectorstores import FAISS
     from utils import set_vectorstore
 
-    # groq_key = (
-    #     st.secrets.get("GROQ_API_KEY", None)
-    #     or os.getenv("GROQ_API_KEY")
-    # )
+    groq_key = (
+        st.secrets.get("GROQ_API_KEY", None)
+        or os.getenv("GROQ_API_KEY")
+    )
     
-    groq_key = os.getenv("GROQ_API_KEY")
+    # groq_key = os.getenv("GROQ_API_KEY")
 
     llm = ChatGroq(
         model="llama-3.3-70b-versatile",
@@ -124,17 +113,9 @@ with st.sidebar:
     st.caption("Context Precision: 0.81 ✅")
     st.caption("*(update with your actual scores)*")
 
-
-# ─────────────────────────────────────────────
-# LOAD MODELS
-# ─────────────────────────────────────────────
 with st.spinner("Loading AI models — please wait..."):
     llm, vs = load_all()
 
-
-# ─────────────────────────────────────────────
-# MAIN CHAT UI
-# ─────────────────────────────────────────────
 st.title("📊 Call Center AI Analyst")
 st.caption(
     "Ask any question about agent performance, "
