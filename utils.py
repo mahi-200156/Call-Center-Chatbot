@@ -38,6 +38,7 @@ def init_llm():
         model="llama-3.3-70b-versatile",
         temperature=0,
         api_key=os.getenv("GROQ_API_KEY")
+        stop=["\nObservation:"]
     )
 
 def init_embeddings():
@@ -509,8 +510,10 @@ Question: {input}
         agent=agent,
         tools=TOOLS,
         verbose=True,
-        max_iterations=8,
+        max_iterations=15,
+        max_execution_time=45,
         handle_parsing_errors=True,
+        early_stopping_method="generate",
         return_intermediate_steps=True
     )
 
