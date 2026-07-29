@@ -1,28 +1,4 @@
-"""
-evaluate.py — RAGAS Evaluation for Call Center AI Analyst
-══════════════════════════════════════════════════════════
 
-What this does:
-  Tests the RAG pipeline (search_knowledge_base tool)
-  on 10 call center questions and measures:
-    → Faithfulness:      Is answer grounded in docs? (no hallucination)
-    → Answer Relevancy:  Does answer address the question?
-    → Context Precision: Are retrieved chunks actually useful?
-
-How to run:
-  python evaluate.py
-
-Output:
-  → Scores printed to terminal
-  → Results saved to evaluation_results.json
-  → Summary saved to evaluation_summary.txt
-
-Note:
-  SQL tools (get_agent_metrics, get_team_comparison etc.)
-  are not RAG — they query SQL directly, so RAGAS
-  does not apply to them. Only search_knowledge_base
-  uses RAG retrieval and is evaluated here.
-"""
 
 import os
 import json
@@ -46,18 +22,15 @@ from ragas.embeddings import LangchainEmbeddingsWrapper
 
 load_dotenv()
 
-
-# ─────────────────────────────────────────────────────────────────
 # TEST DATASET
 # 10 questions covering all 3 document types in the vector store:
 #   → KPI definitions (4 docs)
 #   → Monthly team summaries (24 docs)
 #   → Agent annual profiles (10 docs)
-# ─────────────────────────────────────────────────────────────────
+
 
 TEST_CASES = [
 
-    # ── KPI Definitions ────────────────────────────────────────────
     {
         "question": "What is AHT and what is the target for it?",
         "ground_truth": (
@@ -114,7 +87,7 @@ TEST_CASES = [
         )
     },
 
-    # ── Agent Profiles ──────────────────────────────────────────────
+
     {
         "question": "Who are the agents in Team A and where are they located?",
         "ground_truth": (
@@ -132,7 +105,7 @@ TEST_CASES = [
         )
     },
 
-    # ── KPI Overview ───────────────────────────────────────────────
+
     {
         "question": "What KPI targets should call center agents meet?",
         "ground_truth": (
@@ -153,10 +126,9 @@ TEST_CASES = [
 ]
 
 
-# ─────────────────────────────────────────────────────────────────
 # RAG PIPELINE
 # Runs search_knowledge_base + LLM generation for each question
-# ─────────────────────────────────────────────────────────────────
+
 
 def run_rag_for_question(
     question: str,
@@ -200,9 +172,6 @@ def run_rag_for_question(
     }
 
 
-# ─────────────────────────────────────────────────────────────────
-# MAIN EVALUATION
-# ─────────────────────────────────────────────────────────────────
 
 def run_evaluation():
 
@@ -213,7 +182,6 @@ def run_evaluation():
     print(f"   Metrics: Faithfulness, Answer Relevancy, Context Precision")
     print("="*60 + "\n")
 
-    # ── Initialize models ──────────────────────────────────────────
     print("Loading models...")
 
     llm = ChatGroq(
@@ -221,24 +189,24 @@ def run_evaluation():
         temperature=0,
         api_key=os.getenv("GROQ_API_KEY")
     )
-    print("  ✅ Groq LLM loaded")
+    print("Groq LLM loaded")
 
     embeddings = HuggingFaceEmbeddings(
         model_name="all-MiniLM-L6-v2",
         model_kwargs={"device": "cpu"},
         encode_kwargs={"normalize_embeddings": True}
     )
-    print("  ✅ HuggingFace embeddings loaded")
+    print("HuggingFace embeddings loaded")
 
     vectorstore = FAISS.load_local(
         "vectorstore_cc",
         embeddings,
         allow_dangerous_deserialization=True
     )
-    print("  ✅ FAISS vector store loaded")
+    print("FAISS vector store loaded")
     print()
 
-    # ── Run RAG pipeline for each test case ───────────────────────
+
     print("Running RAG pipeline on test questions...")
     print("-" * 60)
 
@@ -263,7 +231,7 @@ def run_evaluation():
     print("-" * 60)
     print(f"  ✅ All {len(TEST_CASES)} questions processed\n")
 
-    # ── Build RAGAS dataset ───────────────────────────────────────
+    # Build RAGAS dataset 
     dataset = Dataset.from_dict({
         "question":     questions,
         "answer":       answers,
@@ -271,7 +239,7 @@ def run_evaluation():
         "ground_truth": ground_truths
     })
 
-    # ── Configure RAGAS to use Groq + HuggingFace ─────────────────
+  
     # (instead of default OpenAI)
     ragas_llm = LangchainLLMWrapper(ChatGroq(
         model="llama-3.3-70b-versatile",
@@ -287,7 +255,7 @@ def run_evaluation():
         )
     )
 
-    # ── Run RAGAS evaluation ──────────────────────────────────────
+    # Run RAGAS evaluation 
     print("Running RAGAS evaluation (this takes 2-5 minutes)...")
     print("Each metric calls the LLM to judge quality.\n")
     
@@ -309,7 +277,7 @@ def run_evaluation():
         embeddings=ragas_embeddings
     )
 
-    # ── Extract scores ─────────────────────────────────────────────
+  
     scores_df = results.to_pandas()
 
     faithfulness_score     = round(scores_df["faithfulness"].mean(), 3)
@@ -320,7 +288,6 @@ def run_evaluation():
         3
     )
 
-    # ── Print results ──────────────────────────────────────────────
     print("\n" + "="*60)
     print("   EVALUATION RESULTS")
     print("="*60)
@@ -345,7 +312,7 @@ def run_evaluation():
     print("  0.85 - 1.0 → Excellent (well-tuned pipeline)")
     print("="*60 + "\n")
 
-    # ── Per-question breakdown ─────────────────────────────────────
+  
     print("Per-Question Breakdown:")
     print("-"*60)
     for i, row in scores_df.iterrows():
@@ -362,10 +329,8 @@ def run_evaluation():
             f"{q_short}"
         )
 
-    # ── Save results ───────────────────────────────────────────────
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    # Save detailed JSON
     full_results = {
         "timestamp":   timestamp,
         "num_tests":   len(TEST_CASES),
@@ -390,7 +355,6 @@ def run_evaluation():
     with open("evaluation_results.json", "w") as f:
         json.dump(full_results, f, indent=2)
 
-    # Save readable summary
     with open("evaluation_summary.txt", "w") as f:
         f.write(f"Call Center AI Analyst — RAGAS Evaluation\n")
         f.write(f"Run at: {timestamp}\n")
@@ -408,9 +372,6 @@ def run_evaluation():
     return full_results
 
 
-# ─────────────────────────────────────────────────────────────────
-# RUN
-# ─────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
     run_evaluation()
