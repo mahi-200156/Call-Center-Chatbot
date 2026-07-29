@@ -15,23 +15,17 @@ Call center managers currently:
 - Spend hours correlating data across agents and teams
 - Need analyst support for every ad-hoc question
   
-A manager who wants to know why an agent is
-underperforming must open dashboards, run queries,
-and cross-reference data manually.
+A manager who wants to know why an agent is underperforming must open dashboards, run queries, and cross-reference data manually.
 
-**This system replaces that workflow — type a question,
-get a structured analysis in seconds.**
+**This system replaces that workflow — type a question, get a structured analysis in seconds.**
 
-```
 Manager types: "Why is Vikram underperforming?"
 
 System responds in seconds:
-"Vikram Nair's AHT of 6.2 min is 38% above team
-average. FCR has declined from 71% in Q1 to 65%
-in Q4 — a worsening trend. CSAT at 74% is 11 pts
-below target. Recommend immediate coaching on
-talk time management."
-```
+"Vikram Nair's AHT of 6.2 min is 38% above team average.
+ FCR has declined from 71% in Q1 to 65% in Q4 — a worsening trend.
+ CSAT at 74% is 11 pts below target.
+ Recommend immediate coaching on talk time management."
 
 ##  Why This Is An AGENT, Not Just RAG
 
@@ -87,8 +81,7 @@ SQL Tools                               RAG Tool
 
 # RAGAS Evaluation Results
 
-The RAG pipeline is validated using the
-[RAGAS framework](https://github.com/explodinggradients/ragas).
+The RAG pipeline is validated using the [RAGAS framework](https://github.com/explodinggradients/ragas).
 
 | Metric | Score | Meaning |
 |---|---|---|
