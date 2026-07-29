@@ -202,7 +202,7 @@ def get_top_bottom_agents(metric: str, n: int = 3,
     Example: get_top_bottom_agents("fcr", 3, "all", "top")
     """
 
-    # ── VALIDATION BLOCK — fixes the AVG() crash ──────────────────
+
     # Clean metric input
     if not metric or not str(metric).strip():
         return (
@@ -265,7 +265,6 @@ def get_top_bottom_agents(metric: str, n: int = 3,
     else:
         order = "DESC" if rank == "top" else "ASC"
 
-    # ── QUARTER MAPPING ────────────────────────────────────────────
     QUARTERS = {
         "Q1": ["Jan-2024", "Feb-2024", "Mar-2024"],
         "Q2": ["Apr-2024", "May-2024", "Jun-2024"],
@@ -276,7 +275,7 @@ def get_top_bottom_agents(metric: str, n: int = 3,
     conn = get_db()
 
     try:
-        # ── QUERY BY QUARTER ───────────────────────────────────────
+
         if period.upper() in QUARTERS:
             months = QUARTERS[period.upper()]
             ph = ",".join("?" * len(months))
@@ -291,7 +290,7 @@ def get_top_bottom_agents(metric: str, n: int = 3,
                 LIMIT ?
             """, (*months, n)).fetchall()
 
-        # ── QUERY ALL PERIODS ──────────────────────────────────────
+
         elif period.lower() == "all":
             rows = conn.execute(f"""
                 SELECT agent_name,
@@ -303,7 +302,7 @@ def get_top_bottom_agents(metric: str, n: int = 3,
                 LIMIT ?
             """, (n,)).fetchall()
 
-        # ── QUERY SPECIFIC MONTH ───────────────────────────────────
+
         else:
             rows = conn.execute(f"""
                 SELECT agent_name,
