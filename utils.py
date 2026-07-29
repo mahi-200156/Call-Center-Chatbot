@@ -511,7 +511,7 @@ Question: {input}
         tools=TOOLS,
         verbose=True,
         max_iterations=15,
-        max_execution_time=45,
+        max_execution_time=90,
         handle_parsing_errors=True,
         # early_stopping_method="generate",
         return_intermediate_steps=True
