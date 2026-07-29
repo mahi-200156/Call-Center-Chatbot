@@ -513,7 +513,7 @@ Question: {input}
         max_iterations=15,
         max_execution_time=45,
         handle_parsing_errors=True,
-        early_stopping_method="generate",
+        # early_stopping_method="generate",
         return_intermediate_steps=True
     )
 
