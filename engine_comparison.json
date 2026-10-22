@@ -1,0 +1,255 @@
+{
+  "timestamp": "2026-10-14 18:39:10",
+  "model": "openai/gpt-oss-120b",
+  "summary": {
+    "react": {
+      "questions": 8,
+      "success_rate": 0.0,
+      "right_tool_rate": 0.125,
+      "avg_seconds": 34.93,
+      "avg_tool_calls": 0.38
+    },
+    "langgraph": {
+      "questions": 8,
+      "success_rate": 1.0,
+      "right_tool_rate": 1.0,
+      "avg_seconds": 8.63,
+      "avg_tool_calls": 1.25
+    }
+  },
+  "rows": [
+    {
+      "engine": "react",
+      "answer": "Agent stopped due to iteration limit or time limit.",
+      "tools_used": [
+        "_Exception"
+      ],
+      "seconds": 37.44,
+      "error": null,
+      "failed": true,
+      "question": "What is AHT and what is its target?",
+      "expected_any": [
+        "search_knowledge_base"
+      ],
+      "tool_ok": false
+    },
+    {
+      "engine": "langgraph",
+      "answer": "**AHT (Average Handle Time)** \u2013 the average amount of time an agent spends on a call, including talk time, hold time, and after\u2011call work (wrap\u2011up).  \n\n**Target:**\u202fLess than **5.0\u202fminutes** per call (lower\u202f=\u202fbetter).",
+      "tools_used": [
+        "search_knowledge_base"
+      ],
+      "seconds": 4.08,
+      "error": null,
+      "failed": false,
+      "question": "What is AHT and what is its target?",
+      "expected_any": [
+        "search_knowledge_base"
+      ],
+      "tool_ok": true
+    },
+    {
+      "engine": "langgraph",
+      "answer": "The agent with the lowest First Call Resolution (FCR) in Q3\u202f2024 is **Vikram\u202fNair (Team\u202fA)**, whose FCR was **68.4\u202f%**\u2014well below the target of\u202f>\u202f80\u202f%.",
+      "tools_used": [
+        "get_top_bottom_agents"
+      ],
+      "seconds": 2.19,
+      "error": null,
+      "failed": false,
+      "question": "Who has the worst FCR in Q3?",
+      "expected_any": [
+        "get_top_bottom_agents"
+      ],
+      "tool_ok": true
+    },
+    {
+      "engine": "react",
+      "answer": "",
+      "tools_used": [],
+      "seconds": 1.97,
+      "error": "Tool choice is none, but model called a tool",
+      "failed": true,
+      "question": "Who has the worst FCR in Q3?",
+      "expected_any": [
+        "get_top_bottom_agents"
+      ],
+      "tool_ok": false
+    },
+    {
+      "engine": "react",
+      "answer": "",
+      "tools_used": [],
+      "seconds": 1.36,
+      "error": "Tool choice is none, but model called a tool",
+      "failed": true,
+      "question": "Compare Team A vs Team B for the full year",
+      "expected_any": [
+        "get_team_comparison"
+      ],
+      "tool_ok": false
+    },
+    {
+      "engine": "langgraph",
+      "answer": "**Team\u2011level performance (Jan\u202f\u2013\u202fDec\u202f2024)**  \n\n| KPI | Team\u202fA | Team\u202fB | Target | Gap / Surplus |\n|-----|--------|--------|--------|---------------|\n| **AHT (min)** | **5.41** | **4.55** | <\u202f5.0 | A\u202f=\u202f+0.41\u202fmin (miss) \u2022 B\u202f=\u202f\u20110.45\u202fmin (meets) |\n| **FCR (%)** | **75.1\u202f%** | **83.1\u202f%** | >\u202f80\u202f% | A\u202f=\u202f\u20114.9\u202fpts (miss) \u2022 B\u202f=\u202f+3.1\u202fpts (meets) |\n| **CSAT (%)** | **80.4\u202f%** | **87.8\u202f%** | >\u202f85\u202f% | A\u202f=\u202f\u20114.6\u202fpts (miss) \u2022 B\u202f=\u202f+2.8\u202fpts (meets) |\n| **Adherence (%)** | **85.8\u202f%** | **91.6\u202f%** | >\u202f90\u202f% | A\u202f=\u202f\u20114.2\u202fpts (miss) \u2022 B\u202f=\u202f+1.6\u202fpts (meets) |\n| **Total Calls Handled** | 13,563 | 13,059 | \u2013 | A handled ~4\u202f% more volume |\n\n### Key Take\u2011aways\n1. **Team\u202fB consistently meets or exceeds every KPI**, especially AHT (4.55\u202fmin) and adherence (91.6\u202f%).  \n2. **Team\u202fA underperforms on all four metrics**, with the biggest gaps in AHT (+0.41\u202fmin) and FCR (\u20114.9\u202fpts).  \n3. Despite lower efficiency, Team\u202fA processed **~4\u202f% more calls**, indicating higher workload pressure that likely contributes to the KPI shortfalls.\n\n### Actionable Recommendations\n\n| Issue | Recommended Action | Expected Impact |\n|-------|--------------------|-----------------|\n| **AHT too high (5.41\u202fmin)** | \u2022 Conduct a quick\u2011win call\u2011flow audit on the top\u20115 call types that drive longer handling times.<br>\u2022 Deploy targeted micro\u2011training on call triage and use of knowledge\u2011base shortcuts. | Reduce average handle time by ~0.3\u20110.5\u202fmin, bringing Team\u202fA under the 5\u2011min target. |\n| **FCR below 80\u202f%** | \u2022 Identify the most frequent \u201crepeat\u2011call\u201d reasons via call\u2011reason codes; create a FAQ/solution script for those issues.<br>\u2022 Introduce a \u201cfirst\u2011call resolution checklist\u201d for agents to verify problem closure before ending the call. | Boost FCR by 3\u20115\u202fpts, aligning with the 80\u202f% target. |\n| **CSAT lagging** | \u2022 Implement post\u2011call \u201cquick\u2011pulse\u201d surveys for a sample of calls to capture real\u2011time sentiment and coach agents on tone & empathy.<br>\u2022 Recognize and share best\u2011practice recordings from Team\u202fB agents with high CSAT scores. | Lift CSAT by 3\u20114\u202fpts, moving above 85\u202f%. |\n| **Adherence shortfall** | \u2022 Review schedule adherence reports to pinpoint shift\u2011swap or break\u2011policy violations.<br>\u2022 Introduce a real\u2011time adherence dashboard with alerts for agents falling >5\u202f% off schedule. | Increase adherence to \u226590\u202f% by improving punctuality and break compliance. |\n| **Higher call volume pressure** | \u2022 Re\u2011balance workload: consider shifting ~5\u202f% of calls from Team\u202fA to Team\u202fB (or add a part\u2011time buffer resource) to reduce agent fatigue.<br>\u2022 Automate routine inquiries (e.g., balance checks) via IVR/Chatbot to free agent time. | Lower AHT and improve FCR/CSAT as agents can focus on complex issues. |\n\n### Quick Wins (3\u2011month horizon)\n\n1. **Micro\u2011training sprint** on the top 3 call categories that inflate AHT \u2013 expected AHT reduction of ~0.2\u202fmin.  \n2. **FCR checklist rollout** \u2013 pilot with 4 agents, then scale; aim for +3\u202fpts FCR.  \n3. **Adherence alert system** \u2013 simple Slack/Teams bot notifying agents when they dip below 90\u202f% schedule adherence; target +2\u202fpts adherence.\n\nBy addressing the workflow inefficiencies and reinforcing first\u2011call resolution practices, Team\u202fA can close the KPI gaps while maintaining its higher call volume. Team\u202fB\u2019s practices (shorter AHT, higher adherence) should be documented and shared as best\u2011practice models for Team\u202fA.",
+      "tools_used": [
+        "get_team_comparison"
+      ],
+      "seconds": 3.95,
+      "error": null,
+      "failed": false,
+      "question": "Compare Team A vs Team B for the full year",
+      "expected_any": [
+        "get_team_comparison"
+      ],
+      "tool_ok": true
+    },
+    {
+      "engine": "langgraph",
+      "answer": "**Kavya Menon \u2013 Full\u2011Year 2024 Performance**\n\n| KPI | Year\u2011Average | Target | Status |\n|-----|--------------|--------|--------|\n| **AHT** (minutes) | **4.05\u202fm** | <\u202f5.0\u202fm | \u2705 Well below the ceiling |\n| **FCR** | **90.0\u202f%** | >\u202f80\u202f% | \u2705 Strong, but a few months dip |\n| **CSAT** | **93.1\u202f%** | >\u202f85\u202f% | \u2705 Excellent |\n| **Adherence** | **96.1\u202f%** | >\u202f90\u202f% | \u2705 Very high |\n| **Calls Handled** | **\u2248\u202f223\u202fcalls / month** (2\u202f677 total) | \u2013 | \u2013 |\n\n### Monthly Highlights (Key Deviations)\n\n| Month | AHT | FCR | CSAT | Adherence | Comment |\n|-------|-----|-----|------|-----------|---------|\n| **Jan** | 3.8\u202fm | 91.8\u202f% | 92.2\u202f% | 97.9\u202f% | Strong start |\n| **Feb** | 4.0\u202fm | 89.2\u202f% | 91.4\u202f% | 93.1\u202f% | Adherence dip (\u20114.8\u202fpts) |\n| **May** | 4.0\u202fm | **87.6\u202f%** (lowest) | 93.9\u202f% | 97.4\u202f% | FCR below 90\u202f% |\n| **Jun** | 4.1\u202fm | 88.8\u202f% | 94.1\u202f% | 96.9\u202f% | Consistent CSAT |\n| **Jul** | **3.6\u202fm** (best) | 88.9\u202f% | 94.3\u202f% | 95.4\u202f% | AHT improvement |\n| **Aug** | 4.1\u202fm | **93.2\u202f%** (best) | 92.9\u202f% | **98.3\u202f%** (best) | Peak adherence |\n| **Oct** | 4.2\u202fm | 88.3\u202f% | 94.4\u202f% | 95.5\u202f% | Stable |\n| **Nov** | 4.6\u202fm | 89.0\u202f% | 93.9\u202f% | 95.7\u202f% | AHT rise |\n| **Dec** | **4.6\u202fm** (worst) | 87.7\u202f% | 91.3\u202f% | 94.4\u202f% | Highest AHT, lower FCR/CSAT |\n\n### Trend Insights\n\n* **AHT** \u2013 Overall excellent (4.05\u202fm) but spikes in **Nov\u2011Dec** (4.6\u202fm). The July dip to 3.6\u202fm shows she can handle calls faster when workload is balanced.\n* **FCR** \u2013 Average 90\u202f% (well above target) yet three months (May, Oct, Dec) fall just under 90\u202f%. These coincide with higher call volumes.\n* **CSAT** \u2013 Consistently >\u202f91\u202f% throughout the year, peaking at 94.4\u202f% in Oct.\n* **Adherence** \u2013 Very strong (>\u202f93\u202f% every month). The February dip (93.1\u202f%) is the only breach of the 95\u202f% \u201cgold\u201d zone but still above the 90\u202f% target.\n\n### Actionable Recommendations\n\n| Area | Recommendation | Expected Impact |\n|------|----------------|-----------------|\n| **AHT reduction in Q4** | \u2022 Review call scripts and knowledge\u2011base usage for Dec\u2011Jan spikes.<br>\u2022 Introduce a short \u201cquick\u2011resolution\u201d checklist for routine issues.<br>\u2022 Pair Kavya with a high\u2011AHT peer for a 2\u2011week shadowing session. | Aim to bring Q4 AHT \u2264\u202f4.2\u202fm (\u20110.4\u202fm vs. current) |\n| **FCR consistency** | \u2022 Conduct a root\u2011cause analysis on the May & Dec tickets that required callbacks.<br>\u2022 Provide targeted product\u2011update training before high\u2011volume months (May, Oct, Dec). | Target \u2265\u202f92\u202f% FCR in those months |\n| **Maintain CSAT** | \u2022 Keep the \u201ccustomer\u2011first\u201d tone scripts that are driving >\u202f93\u202f% scores.<br>\u2022 Celebrate the July AHT win in team huddles to reinforce best practices. | Preserve >\u202f92\u202f% CSAT year\u2011round |\n| **Adherence vigilance** | \u2022 Set a reminder for February\u2011type schedule adjustments (e.g., shift swaps) to avoid future dips.<br>\u2022 Use the adherence dashboard to flag any <\u202f95\u202f% days early. | Keep adherence >\u202f95\u202f% consistently |\n| **Call volume management** | \u2022 When call volume exceeds 240/month (July, Aug, Sep, Oct), schedule a short \u201cfocus\u2011time\u201d block to handle complex cases, preventing AHT creep. | Smoother workload, lower AHT spikes |\n\n### Bottom Line\n\nKavya Menon **exceeds all KPI targets** for 2024, delivering **high\u2011quality, timely service** with excellent schedule discipline. The primary opportunities lie in **flattening the Q4 AHT rise** and **tightening FCR during peak\u2011volume months**. Implementing the above micro\u2011coaching and process tweaks should push her performance from \u201cexcellent\u201d to \u201cbenchmark\u2011setting\u201d for the team.",
+      "tools_used": [
+        "get_agent_metrics"
+      ],
+      "seconds": 5.94,
+      "error": null,
+      "failed": false,
+      "question": "Show Kavya Menon complete performance",
+      "expected_any": [
+        "get_agent_metrics"
+      ],
+      "tool_ok": true
+    },
+    {
+      "engine": "react",
+      "answer": "Agent stopped due to iteration limit or time limit.",
+      "tools_used": [
+        "_Exception",
+        "get_agent_metrics"
+      ],
+      "seconds": 142.97,
+      "error": null,
+      "failed": true,
+      "question": "Show Kavya Menon complete performance",
+      "expected_any": [
+        "get_agent_metrics"
+      ],
+      "tool_ok": true
+    },
+    {
+      "engine": "react",
+      "answer": "",
+      "tools_used": [],
+      "seconds": 1.57,
+      "error": "Tool choice is none, but model called a tool",
+      "failed": true,
+      "question": "How did FCR change from Q1 to Q4?",
+      "expected_any": [
+        "calculate_metric_change"
+      ],
+      "tool_ok": false
+    },
+    {
+      "engine": "langgraph",
+      "answer": "**First\u2011Call Resolution (FCR) \u2013 Q1 vs. Q4 (2024)**  \n\n| Team | Q1 FCR | Q4 FCR | Absolute \u0394 | Relative \u0394 |\n|------|--------|--------|------------|------------|\n| **Team\u202fA (Mumbai)** | **74.9\u202f%** | **75.0\u202f%** | **+0.04\u202fpp** | **+0.1\u202f%** (slight improvement) |\n| **Team\u202fB (Bangalore)** | **83.4\u202f%** | **82.6\u202f%** | **\u20110.79\u202fpp** | **\u20110.9\u202f%** (decline) |\n\n### What the numbers mean\n- **Team\u202fA** barely moved the needle; the 0.04\u2011percentage\u2011point rise keeps it well **below the 80\u202f% target**.  \n- **Team\u202fB** slipped just under 1\u202fpercentage point, dropping from **above** to **below** the 80\u202f% target.\n\n### Actionable insights\n1. **Team\u202fB \u2013 Reverse the dip**\n   - **Root\u2011cause analysis** on Q3\u2013Q4 calls (e.g., new product issues, staffing changes) to pinpoint why FCR fell.\n   - **Targeted coaching** on resolution techniques for agents whose Q4 FCR is below their Q1 baseline.\n   - **Introduce a quick\u2011resolution script** for the most common issues that caused the drop.\n\n2. **Team\u202fA \u2013 Accelerate improvement**\n   - **Set a short\u2011term goal**: raise FCR to **\u226578\u202f%** by end of Q1\u202f2025 (\u2248+3\u202fpp).\n   - **Pilot a \u201cfirst\u2011call win\u201d checklist** for the top\u2011performing agents and roll it out team\u2011wide.\n   - **Monitor daily FCR** and flag any agent whose daily rate falls <70\u202f% for immediate feedback.\n\n3. **Cross\u2011team learning**\n   - Have **Team\u202fB share best practices** that kept them above target in Q1 (e.g., knowledge\u2011base usage, escalation avoidance) with Team\u202fA.\n   - Conduct a **joint weekly review** of FCR trends to keep both teams aligned on the 80\u202f% target.\n\n**Bottom line:** From Q1 to Q4, Team\u202fA\u2019s FCR stayed essentially flat (+0.04\u202fpp) while Team\u202fB\u2019s slipped by \u20130.79\u202fpp, moving it below the desired threshold. Immediate corrective actions for Team\u202fB and a growth plan for Team\u202fA are recommended to meet the >80\u202f% FCR target in 2025.",
+      "tools_used": [
+        "get_team_comparison",
+        "calculate_metric_change"
+      ],
+      "seconds": 42.0,
+      "error": null,
+      "failed": false,
+      "question": "How did FCR change from Q1 to Q4?",
+      "expected_any": [
+        "calculate_metric_change"
+      ],
+      "tool_ok": true
+    },
+    {
+      "engine": "langgraph",
+      "answer": "**Team\u202fB \u2013 First Call Resolution (FCR) Trend**\n\n| Period | FCR |\n|--------|-----|\n| **Q1\u202f2024** | **83.38\u202f%** |\n| **Q4\u202f2024** | **82.59\u202f%** |\n| **\u0394 (Q1 \u2192 Q4)** | **\u20110.79\u202fpp** (\u20110.9\u202f%) |\n\n- **Target:**\u202f>\u202f80\u202f% \u2013\u202fTeam\u202fB stays above the target, but the metric slipped slightly.\n- **Direction:**\u202fNegative trend (\u20110.9\u202f% QoQ).\n\n### Actionable Insights\n\n| Issue | Why It Matters | Quick Wins |\n|-------|----------------|------------|\n| **Slight FCR decline** | Even a sub\u20111\u202f% drop can signal emerging gaps in knowledge, process, or call routing that may widen over time. | 1. **Root\u2011cause audit** on Q4 calls with low\u2011FCR scores (e.g., repeat contacts, escalations).<br>2. **Refresh knowledge\u2011base articles** that were accessed most during Q4. |\n| **Potential skill drift** | Agents may be handling newer product issues without updated training. | 3. **Targeted micro\u2011learning** for the top\u20113 issue categories that drove repeat calls in Q4.<br>4. **Peer\u2011shadowing**: pair agents with the highest FCR (top\u2011bottom agents list) for a week. |\n| **Call routing inefficiencies** | Mis\u2011routed calls increase handling time and reduce first\u2011call success. | 5. **Review IVR/skill\u2011based routing rules**; adjust to route high\u2011complexity issues directly to senior agents. |\n| **Monitoring** | Ongoing tracking prevents small declines from becoming larger problems. | 6. **Set a weekly FCR dashboard alert** when the metric drops >0.3\u202fpp from the prior week. |\n\n### Recommendation\n\n- **Immediate:** Conduct a focused FCR audit on Q4 calls (top 5 issue types) and implement quick\u2011fix knowledge updates.\n- **Mid\u2011term:** Roll out a 2\u2011week refresher training for all Team\u202fB agents on the identified gaps, then re\u2011measure FCR in Q1\u202f2025.\n- **Long\u2011term:** Integrate the weekly FCR alert into the team\u2019s performance dashboard and tie a small incentive (e.g., \u201cFCR Champion\u201d) to sustained improvement.\n\nBy addressing the root causes now, Team\u202fB can not only **recover the 0.79\u202fpp loss** but also push the FCR **well above the 80\u202f% target**, strengthening overall customer satisfaction.",
+      "tools_used": [
+        "calculate_metric_change"
+      ],
+      "seconds": 2.93,
+      "error": null,
+      "failed": false,
+      "question": "How did Team B FCR change from Q1 to Q4?",
+      "expected_any": [
+        "calculate_metric_change"
+      ],
+      "tool_ok": true
+    },
+    {
+      "engine": "react",
+      "answer": "",
+      "tools_used": [],
+      "seconds": 20.6,
+      "error": "3 validation errors for calculate_metric_changeSchema\nmetric\n  field required (type=value_error.missing)\nfrom_period\n  field required (type=value_error.missing)\nto_period\n  field required (type=value_error.missing)",
+      "failed": true,
+      "question": "How did Team B FCR change from Q1 to Q4?",
+      "expected_any": [
+        "calculate_metric_change"
+      ],
+      "tool_ok": false
+    },
+    {
+      "engine": "react",
+      "answer": "",
+      "tools_used": [],
+      "seconds": 3.73,
+      "error": "Tool choice is none, but model called a tool",
+      "failed": true,
+      "question": "Which agents are below CSAT target?",
+      "expected_any": [
+        "get_top_bottom_agents",
+        "get_agent_metrics"
+      ],
+      "tool_ok": false
+    },
+    {
+      "engine": "langgraph",
+      "answer": "**Agents whose CSAT is below the\u202f>\u202f85\u202f% target (all\u2011time average):**\n\n| Agent | Team | CSAT |\n|-------|------|------|\n| Vikram Nair | Team\u202fA | 73.77\u202f% |\n| Pooja Mehta | Team\u202fA | 77.83\u202f% |\n| Priya Reddy | Team\u202fB | 79.77\u202f% |\n| Rahul\u202fJoshi | Team\u202fA | 81.09\u202f% |\n| Amit\u202fGupta | Team\u202fA | 82.48\u202f% |\n| Sneha\u202fIyer | Team\u202fB | 84.77\u202f% |\n\nThese six agents are the only ones falling short of the CSAT target of\u202f>\u202f85\u202f%.",
+      "tools_used": [
+        "get_top_bottom_agents"
+      ],
+      "seconds": 2.07,
+      "error": null,
+      "failed": false,
+      "question": "Which agents are below CSAT target?",
+      "expected_any": [
+        "get_top_bottom_agents",
+        "get_agent_metrics"
+      ],
+      "tool_ok": true
+    },
+    {
+      "engine": "langgraph",
+      "answer": "**Vikram Nair \u2013 KPI snapshot (Jan\u2011Dec\u202f2024)**  \n\n| KPI | Avg\u202f2024 | Target | How far off |\n|-----|----------|--------|-------------|\n| **AHT** | **6.6\u202fmin** | <\u202f5.0\u202fmin | **+1.6\u202fmin** (31\u202f% slower) |\n| **FCR** | **68.0\u202f%** | >\u202f80\u202f% | **\u201112\u202fpp** (15\u202f% below target) |\n| **CSAT** | **73.5\u202f%** | >\u202f85\u202f% | **\u201111.5\u202fpp** (13\u202f% below target) |\n| **Adherence** | **78.0\u202f%** | >\u202f90\u202f% | **\u201112\u202fpp** (13\u202f% below target) |\n\n*Compared with Team\u202fA averages (AHT\u202f5.41\u202fmin, FCR\u202f75.1\u202f%, CSAT\u202f80.4\u202f%, Adherence\u202f85.8\u202f%)*, Vikram is **consistently below every benchmark**.\n\n### Where the gaps are biggest\n| Month | KPI (worst) | Value |\n|-------|-------------|-------|\n| **May\u20112024** | CSAT | 71.2\u202f% (lowest of the year) |\n| **Jun\u20112024** | FCR | 64.9\u202f% (lowest) |\n| **Nov\u20112024** | AHT | 6.8\u202fmin (highest) |\n| **Jul\u20112024** | Adherence | 76.7\u202f% (lowest) |\n\n### Likely root causes (inferred from the pattern)\n\n| KPI | Possible drivers |\n|-----|-------------------|\n| **AHT (\u2191)** | \u2022 Longer average handling time suggests inefficient call flow or lack of product knowledge. <br>\u2022 Spike in Nov (6.8\u202fmin) coincides with a new product launch \u2013 likely insufficient training. |\n| **FCR (\u2193)** | \u2022 Sub\u201180\u202f% FCR points to unresolved issues or frequent escalations. <br>\u2022 Consistently low across the year, indicating gaps in troubleshooting scripts or decision\u2011making authority. |\n| **CSAT (\u2193)** | \u2022 Directly linked to FCR and AHT \u2013 customers feel the call drags on and their problem isn\u2019t solved. <br>\u2022 The dip in May aligns with the lowest CSAT and a modest dip in adherence, hinting at schedule fatigue. |\n| **Adherence (\u2193)** | \u2022 Regularly 10\u201112\u202fpp below the team average, meaning Vikram is often late to shift start/end or taking unscheduled breaks. <br>\u2022 Low adherence can force rushed calls later, worsening AHT and CSAT. |\n\n### Actionable recommendations\n\n| Action | Why it helps | Quick win target |\n|--------|--------------|------------------|\n| **1. Targeted coaching on call flow** \u2013 review 5 of his longest calls (\u2265\u202f7\u202fmin) with a quality analyst. | Identify steps that can be trimmed or scripted. | Reduce AHT to **\u2264\u202f5.8\u202fmin** within 4\u202fweeks. |\n| **2. FCR skill\u2011boost workshop** \u2013 focus on root\u2011cause analysis, product knowledge, and escalation authority. | Improves first\u2011call resolution and downstream CSAT. | Raise FCR to **\u2265\u202f75\u202f%** in the next month. |\n| **3. Schedule adherence audit** \u2013 compare his logged\u2011in times vs roster; flag any pattern of late log\u2011ins or early log\u2011outs. | Aligns work time with staffing, reduces overtime pressure. | Bring adherence to **\u2265\u202f85\u202f%** in 2\u202fweeks. |\n| **4. Peer\u2011shadowing with a top performer** (e.g., the top\u20113 CSAT agent from Team\u202fA). | Real\u2011time modeling of best practices for tone, empathy, and problem solving. | Aim for a **+5\u202fpp CSAT lift** after 2\u202fweeks of shadowing. |\n| **5. Mini\u2011training on the new product launched in Nov** \u2013 quick refresher on FAQs and troubleshooting steps. | Directly addresses the Nov AHT spike. | Cut Nov\u2011AHT back to **\u2264\u202f6.2\u202fmin** for the next month. |\n| **6. Real\u2011time KPI dashboard alerts** \u2013 set up a personal dashboard that flags when AHT >\u202f6\u202fmin, FCR <\u202f70\u202f%, or adherence <\u202f80\u202f% for a shift. | Gives immediate feedback for self\u2011correction. | Maintain all three alerts under threshold for **\u2265\u202f80\u202f% of shifts** within 1\u202fmonth. |\n\n### Bottom line\nVikram\u2019s 2024 performance is **significantly under the team and corporate targets** across every KPI. The data shows a consistent pattern of longer calls, unresolved issues, lower customer satisfaction, and schedule drift. By focusing on **call\u2011flow efficiency, FCR competency, and adherence discipline**, you can expect measurable improvements within the next 4\u20116\u202fweeks and bring his metrics into line with\u2014or above\u2014Team\u202fA\u2019s averages.",
+      "tools_used": [
+        "get_agent_metrics",
+        "get_team_comparison"
+      ],
+      "seconds": 5.9,
+      "error": null,
+      "failed": false,
+      "question": "Why is Vikram Nair underperforming?",
+      "expected_any": [
+        "get_agent_metrics"
+      ],
+      "tool_ok": true
+    },
+    {
+      "engine": "react",
+      "answer": "",
+      "tools_used": [],
+      "seconds": 69.82,
+      "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kswsx2qzee7stg759wv4hfhc` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196941, Requested 6547. Please try again in 25m6.816s. Need more tokens? Upgrade to Dev Ti",
+      "failed": true,
+      "question": "Why is Vikram Nair underperforming?",
+      "expected_any": [
+        "get_agent_metrics"
+      ],
+      "tool_ok": false
+    }
+  ]
+}
